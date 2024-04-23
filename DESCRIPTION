@@ -1,0 +1,13 @@
+Package: r4dtuser
+Type: Package
+Title: R for Dausch Technologies GmbH - Data science and manipulation
+Version: 2.0.0
+VersionName: Hainfeld
+Author: Markus Kurtz
+Maintainer: Markus Kurtz <m.kurtz@dausch-technologies.de>
+Description: Data science and manipulation package for Dausch Technologies GmbH with focus on service and method development tasks.
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+URL: https://github.com/DrFrEdison/r4dt
+BugReports: https://github.com/DrFrEdison/r4dt/issues
