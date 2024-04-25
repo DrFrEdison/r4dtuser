@@ -55,7 +55,8 @@ transfer_csv <- function(csv.file # input csv file
   # change date & time format ####
   if(any(grepl( "datetime" , names(csv.file.data), fixed = TRUE))) if(!is.na(unlist(gregexpr("T", substr(csv.file.data$datetime[1], 1, 19))))) if(unlist(gregexpr("T", substr(csv.file.data$datetime[1], 1, 19)))>0) csv.file.data$datetime <- as.POSIXct(strptime(csv.file.data$datetime, "%Y-%m-%dT%H:%M:%S") )
   if(any(grepl( "datetime" , names(csv.file.data), fixed = TRUE))) csv.file.data$datetime <- as.POSIXct(csv.file.data$datetime, format = "%Y-%m-%d %H:%M:%S", tz = tz)
-  if(any(grepl( "date" , names(csv.file.data), fixed = TRUE))) csv.file.data$date <- as.POSIXct(csv.file.data$date, format = "%Y-%m-%d", tz = tz)
+  if(any(grepl( "fdate" , names(csv.file.data), fixed = TRUE))) csv.file.data$datetime <- as.POSIXct(csv.file.data$fdate, format = "%Y-%m-%d %H:%M:%S", tz = tz)
+  if(any( names(csv.file.data) %in% "date")) csv.file.data$date <- as.POSIXct(csv.file.data$date, format = "%Y-%m-%d", tz = tz)
   if(any(grepl( "datetime" , names(csv.file.data), fixed = TRUE))){
 
     csv.file.data$time <- strftime(csv.file.data$datetime, format="%H:%M:%S")
