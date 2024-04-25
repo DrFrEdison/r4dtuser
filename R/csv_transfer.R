@@ -132,7 +132,10 @@ transfer_csv <- function(csv.file # input csv file
         if(!data.table.set) if(length(nums)==1) csv.file.data[,nums] <- as.numeric(as.character(gsub(",",".",csv.file.data[,nums])))
         if(data.table.set){
           csv.file.data <- data.table(csv.file.data)
-          csv.file.data[, (names(csv.file.data)[nums]) := lapply(.SD, function(x) as.numeric(as.character(gsub(",", ".", x)))), .SDcols = nums]
+          for(i in nums)
+            csv.file.data[ , i] <- as.numeric(gsub(",", ".", csv.file.data[ , i]))
+
+          # csv.file.data[, (names(csv.file.data)[nums]) := lapply(.SD, function(x) as.numeric(as.character(gsub(",", ".", x)))), .SDcols = nums]
         }
       }
 
