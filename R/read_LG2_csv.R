@@ -147,11 +147,15 @@ read.csv.LG2 <- function(customer
     csvfiles$dat[[ i ]] <- csvfiles$dat[[ i ]][ , 1 : charmatch("Produkt fliesst", colnames(csvfiles$dat[[ i ]]))]
   }
 
-  csvfiles$dat <- lapply(csvfiles$dat, data.table)
-  csvfiles$dat <- lapply(csvfiles$dat, function( x ) x[ , Zeitstempel := as.character( Zeitstempel )])
-  csvfiles$rbind <- do.call(plyr::rbind.fill,csvfiles$dat)
+  # Funktioniert nicht mehr?!
+  # csvfiles$dat <- lapply(csvfiles$dat, data.table)
+  # csvfiles$dat <- lapply(csvfiles$dat, function( x ) data.table(x)[ , Zeitstempel := as.character( Zeitstempel )])
+  for(i in 1:length( csvfiles$dat)){
+    if( is.na( charmatch("Zeitstempel", colnames( csvfiles$dat[[ i ]])))) next
+    csvfiles$dat[[ i ]]$Zeitstempel <- as.character(csvfiles$dat[[ i ]]$Zeitstempel)
+  }
 
-  csvfiles$rbind$Zeitstempel <- as.character(csvfiles$rbind$Zeitstempel)
+  csvfiles$rbind <- do.call(plyr::rbind.fill,csvfiles$dat)
 
   # spc ####
   if(any(grepl( "spc", typeof, fixed = TRUE))){
