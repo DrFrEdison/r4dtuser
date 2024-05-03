@@ -147,6 +147,7 @@ read.csv.LG2 <- function(customer
     csvfiles$dat[[ i ]] <- csvfiles$dat[[ i ]][ , 1 : charmatch("Produkt fliesst", colnames(csvfiles$dat[[ i ]]))]
   }
 
+  csvfiles$dat <- lapply(csvfiles$dat, data.table)
   csvfiles$dat <- lapply(csvfiles$dat, function( x ) x[ , Zeitstempel := as.character( Zeitstempel )])
   csvfiles$rbind <- do.call(plyr::rbind.fill,csvfiles$dat)
 
