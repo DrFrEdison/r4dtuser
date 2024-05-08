@@ -1,13 +1,13 @@
 read_lg3_status <- function(csv_name, file_encoding = "UTF16"
-                       , col_grep = "Time", format_time = "%d.%m.%Y %H:%M:%S"
-                       , tz = "UTC"
-                       , dategsub = NA){
+                            , col_grep = "Time", format_time = "%d.%m.%Y %H:%M:%S"
+                            , tz = "UTC"
+                            , dategsub = NA){
 
   status <- list()
 
+
   # read status data
   status$raw <- read.csv2(csv_name, fileEncoding=file_encoding)
-  head(status$raw)
 
   if( nchar(status$raw[ , grep(col_grep, colnames(status$raw))][1,1]) < 10) format_time <- "%H:%M:%S"
 
