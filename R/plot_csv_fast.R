@@ -274,7 +274,7 @@ fastplot <- function( spcdat, filename
 
   text(x1 <- .825, y1 <- .9, paste0(paste0("Erstellt am ", as.character( format(as.POSIXct(Sys.time(), format="%Y-%m-%d %H:%M:%OS", tz="UTC"), "%d. %B %Y um %H:%M:%S"))
                                            , "\nErsteller = ", Sys.getenv("USERNAME")
-                                           , "\nr4dt-Version = ", paste(packageDescription("r4dt")[4:5], collapse = " ")))
+                                           , "\nr4dtuser-Version = ", paste(packageDescription("r4dtuser")[4:5], collapse = " ")))
        , col = dauschblue, adj = c(0, 1)
        , cex = ifelse(GUI, .6, .8))
 
