@@ -1,4 +1,7 @@
 transfer_csv.num.col <- function(csv.file){
+
+  colnames(csv.file) <- iconv(colnames(csv.file), from = "latin1", to = "UTF-8")
+
   numcol <- suppressWarnings(as.numeric(gsub("X", "",  colnames(csv.file))))
   wavelength <-  numcol[suppressWarnings(which( !is.na(numcol) & numcol > 100))]
   numcol <- suppressWarnings(which( !is.na(numcol) & numcol > 100))
@@ -36,6 +39,8 @@ transfer_csv <- function(csv.file # input csv file
   library(prospectr)
   library(data.table)
   if(!is.data.table(csv.file)) data.table.set = F
+
+  colnames(csv.file) <- iconv(colnames(csv.file), from = "latin1", to = "UTF-8")
 
   # extract spectra columns by searching for numeric column names and number > 100
   numcol <- suppressWarnings(as.numeric(gsub("X", "",  colnames(csv.file))))
