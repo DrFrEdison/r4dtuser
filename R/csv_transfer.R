@@ -67,6 +67,8 @@ transfer_csv <- function(csv.file # input csv file
     csv.file.data$time <- strftime(csv.file.data$datetime, format="%H:%M:%S")
   }
 
+  csv.file.data <- data.table(csv.file.data)
+
   colnames( csv.file.spc.spc ) <- paste0("X", wavelength)
 
   # Order wavelength ####
@@ -129,7 +131,7 @@ transfer_csv <- function(csv.file # input csv file
   }
 
   # make columns numeric ####
-  if(nrow( csv.file.data ) > 1)
+  if(ncol( csv.file.data ) > 0)
     if(is.data.frame(csv.file.data)){
       nums <- suppressWarnings(as.numeric(which(lapply(apply(apply(csv.file.data, 2, as.numeric), 2, function(x) unique(!is.na(x))), any) == T)))
       if( length ( nums ) != 0){
