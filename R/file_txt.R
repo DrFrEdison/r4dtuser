@@ -26,6 +26,10 @@ txt.file <- function(filename
 
   # Für logDateien jetzt abbrechen
   if(any( unlist(lapply( txt$filenamerest, function( x ) grep("logfile", x))) == 1))
+    return( txt)
+
+  # Für drop-Dateien jetzt abbrechen
+  if(any( unlist( lapply(txt$filenamerest, function( x ) length(grep("^[0-9]{6}_.csv", x)) == 1))))
     return(txt)
 
   # Standort
