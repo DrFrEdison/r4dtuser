@@ -63,22 +63,24 @@ stop_quietly <- function() {
   stop()
 }
 
-freadr4dt <- function( csvfile){
-  
+freadr4dt <- function( csvfile, sep = ";", dec = ",", header = T, gsub = "XX", gsub2 = "X"){
+
   csvfile <- gsub(".csv.csv", ".csv", paste0(csvfile, ".csv"))
-  
-  csvfile <- fread(csvfile, sep = ";", dec = ",")
-  
+
+  csvfile <- fread(csvfile, sep = sep, dec = dec, header = header)
+
   ppp <- transfer_csv.num.col(csvfile)
-  
+
   csvfile.names <- colnames(csvfile)
-  
+
   csvfile.names[ ppp$numcol ] <- paste0( "X", csvfile.names[ ppp$numcol ])
   csvfile.names[ ppp$numcol ] <- gsub("XX", "X", csvfile.names[ ppp$numcol ])
   csvfile.names[ ppp$numcol ] <- gsub("XX", "X", csvfile.names[ ppp$numcol ])
-  
+
+  csvfile.names[ ppp$numcol ] <- gsub(gsub, gsub2, csvfile.names[ ppp$numcol ])
+
   setnames(csvfile, new = csvfile.names)
-  
+
   return(csvfile)
 }
 
