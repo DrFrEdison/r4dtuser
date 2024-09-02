@@ -171,7 +171,7 @@ read.csv.SG <- function(
 
       # Check if there are no rows with datetime earlier than the specified window
       if (length(which(as.POSIXct( drk$merge$datetime, tz = "UTC") < range(spc$merge$datetime)[1] - 60 * 15)) == 0)
-        drk$merge <- drk$merge[which(as.POSIXct( drk$merge$datetime, tz = "UTC") < range(spc$merge$datetime)[1] - 60 * 15), ]
+        drk$merge <- drk$merge[which(as.POSIXct( drk$merge$datetime, tz = "UTC") > range(spc$merge$datetime)[1] - 60 * 15), ]
 
       # Check if there are no rows with datetime later than the specified window
       if (length(which(as.POSIXct( drk$merge$datetime, tz = "UTC") > range(spc$merge$datetime)[2] + 60 * 15)) == 0)
@@ -286,7 +286,7 @@ read.csv.SG <- function(
 
       # Check if there are no rows with datetime earlier than the specified window
       if (length(which(ref$merge$datetime < range(spc$merge$datetime)[1] - 60 * 15)) == 0)
-        ref$merge <- ref$merge[which(ref$merge$datetime < range(spc$merge$datetime)[1] - 60 * 15), ]
+        ref$merge <- ref$merge[which(ref$merge$datetime > range(spc$merge$datetime)[1] - 60 * 15), ]
 
       # Check if there are no rows with datetime later than the specified window
       if (length(which(ref$merge$datetime > range(spc$merge$datetime)[2] + 60 * 15)) == 0)
